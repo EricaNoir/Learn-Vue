@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue Basics</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://unpkg.com/vue@next" defer></script>
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <h1>Monster Slayer</h1>
+        </header>
+        <div id="game">
+            <section v-if="winOrNot">
+                <h1 v-if="isMonsterWin">Monster Win</h1>
+                <h1 v-if="isPlayerWin">Player Win</h1>
+                <button @click="reset">Reset Game</button>
+            </section>
+            <section id="monster" class="container">
+                <h2>Monster Health</h2>
+                <div class="healthbar">
+                    <div
+                        class="healthbar__value"
+                        :style="monsterBarStyle"
+                    ></div>
+                </div>
+            </section>
+            <section id="player" class="container">
+                <h2>Your Health</h2>
+                <div class="healthbar">
+                    <div class="healthbar__value" :style="playerBarStyle"></div>
+                </div>
+            </section>
+            <section id="controls">
+                <button :disabled="winOrNot" @click="playerAttack">
+                    ATTACK
+                </button>
+                <button
+                    @click="playerSpecialAttack"
+                    :disabled="canUseSpecialAttack || winOrNot"
+                >
+                    SPECIAL ATTACK
+                </button>
+                <button :disabled="winOrNot" @click="playerHeal">HEAL</button>
+                <button :disabled="winOrNot" @click="surrender">
+                    SURRENDER
+                </button>
+            </section>
+            <section id="log" class="container">
+                <h2>Battle Log</h2>
+                <ul v-if="log.length>0">
+                    <!-- <li v-for="(l, i) in log">{{l}}</li> -->
+                    <li v-for="l in log">
+                        <span
+                            :class="{'log--player': l.actionBy === 'Player', 'log--monster': l.actionBy === 'Monster'}"
+                            >{{l.actionBy}}</span
+                        >{{" "}}
+                        <spam
+                            :class="{'log--damage': l.actionType === 'attacked', 'log--heal': l.actionType === 'healed'}"
+                            >{{l.actionType}}</spam
+                        >
+                        , deals {{l.actionValue}}
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </body>
+</html>
