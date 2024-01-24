@@ -18,6 +18,7 @@ const router = createRouter({
         },
         {
             path: "/coaches/:id",
+            props: true,
             component: CoachDetail,
             children: [{ path: "contact", component: ContactCoach }],
         },

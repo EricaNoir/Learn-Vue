@@ -20,10 +20,10 @@ export default {
             return `${this.firstName} ${this.lastName}`;
         },
         coachContactLink() {
-            return `${this.$router.path}/${this.id}/contact`;
+            return `${this.$route.path}/${this.id}/contact`;
         },
         coachDetailsLink() {
-            return `${this.$router.path}/${this.id}`;
+            return `${this.$route.path}/${this.id}`;
         },
     },
 };
